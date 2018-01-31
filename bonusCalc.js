@@ -46,10 +46,16 @@ function calculateBonusFor( employee ){
   } // end rating > 2
   return {
     name: employee.name,
-    bonusPercentage: bonusPercentage,
+    bonusPercentage: bonusPercentage/0.01 +'%',
     totalCompensation: Number( bonusPercentage * employee.annualSalary ) + Number( employee.annualSalary ),
-    totalBonus: bonusPercentage * employee.annualSalary,
+    totalBonus: Math.round( bonusPercentage * employee.annualSalary),
   };
 } // calculateBonusFor
 
-console.log(employees);
+function calculateAllBonuses(){
+  console.log( 'in calculateAllBonuses' );
+  // loop through employees and calculates their bonuses <- redundant
+  for( var i=0; i < employees.length; i++ ){
+    calculateBonusFor( employees[ i ] );
+  } // end for
+} // end calculateAllBonuses
