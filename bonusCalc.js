@@ -54,8 +54,20 @@ function calculateBonusFor( employee ){
 
 function calculateAllBonuses(){
   console.log( 'in calculateAllBonuses' );
+  $( '#employeesOut' ).empty();
   // loop through employees and calculates their bonuses <- redundant
   for( var i=0; i < employees.length; i++ ){
-    calculateBonusFor( employees[ i ] );
+    var calculatedEmployee = calculateBonusFor( employees[ i ] );
+    var stringToAppend = '<li><strong>' + calculatedEmployee.name + ':'
+    stringToAppend += ' $' + calculatedEmployee.totalCompensation + '</strong>';
+    stringToAppend += ' (' + calculatedEmployee.bonusPercentage + ', ' + calculatedEmployee.totalBonus + ')</li>';
+    $( '#employeesOut' ).append( stringToAppend );
   } // end for
 } // end calculateAllBonuses
+
+$( document ).ready( function(){
+  $( '#calculateButton' ).on( 'click', function(){
+    console.log( 'calculatedEmployee on click' );
+    calculateAllBonuses();
+  }); // end calculatedEmployee on click
+}); // end doc ready
